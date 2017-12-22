@@ -7,7 +7,6 @@ module HasAttachments
 
   # Calculate if a product has at least one associated attachment
   # If no associated attachments exist, return an error
-  #
   def attachment_count
     if self.attachments.map(&:default_record).count == 0
       errors.add(:product, " must have at least one attachment.")
