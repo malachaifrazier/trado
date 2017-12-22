@@ -1,54 +1,54 @@
 Trado::Application.configure do
-	# Settings specified here will take precedence over those in config/application.rb
+  # Settings specified here will take precedence over those in config/application.rb
 
-	# In the development environment your application's code is reloaded o
-	# every request. This slows down response time but is perfect for development
-	# since you don't have to restart the web server when you make code changes.
-	config.cache_classes = false
-	# false value causes following exception: 'A XX been removed from the module tree but is still active!'
+  # In the development environment your application's code is reloaded o
+  # every request. This slows down response time but is perfect for development
+  # since you don't have to restart the web server when you make code changes.
+  config.cache_classes = false
+  # false value causes following exception: 'A XX been removed from the module tree but is still active!'
 
-  	# Eager load code on boot.
-  	config.eager_load = false
+  # Eager load code on boot.
+  config.eager_load = false
 
-	# Raise an error on page load if there are pending migrations
-	config.active_record.migration_error = :page_load
+  # Raise an error on page load if there are pending migrations
+  config.active_record.migration_error = :page_load
 
-	# Show full error reports and disable caching
-	config.consider_all_requests_local       = true
-	
-	config.action_controller.perform_caching = true
-	config.cache_store = :dalli_store
-	# config.action_controller.perform_caching = false
-	  
-	config.action_mailer.preview_path = "#{Rails.root}/app/mailers/previews"
+  # Show full error reports and disable caching
+  config.consider_all_requests_local       = true
 
-	# Set default URL
-	config.action_mailer.default_url_options = { host: Rails.application.secrets.global_url }
+  config.action_controller.perform_caching = true
+  # config.cache_store = :dalli_store
+  config.action_controller.perform_caching = false
 
-	# Don't care if the mailer can't send
-	config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.preview_path = "#{Rails.root}/app/mailers/previews"
 
-	# Emails are appended to an array, non are sent outside the application
-	config.action_mailer.delivery_method = :smtp
+  # Set default URL
+  config.action_mailer.default_url_options = { host: Rails.application.secrets.global_url }
 
-	config.action_mailer.smtp_settings = {
-	  	:address              => Rails.application.secrets.mailer_server,
-	  	:port                 => Rails.application.secrets.mailer_port,
-	  	:domain               => Rails.application.secrets.mailer_domain,
-	  	:authentication       => "plain",
-	  	:user_name            => Rails.application.secrets.mailer_user_name,
-	  	:password             => Rails.application.secrets.mailer_password,
-	  	:enable_starttls_auto => true
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
 
-	}
-	# Print deprecation notices to the Rails logger
-	config.active_support.deprecation = :log
-	$stdout.sync = true
+  # Emails are appended to an array, non are sent outside the application
+  config.action_mailer.delivery_method = :smtp
 
-	# Expands the lines which load the assets
-	config.assets.debug = true
-	config.serve_static_files = true
+  config.action_mailer.smtp_settings = {
+      :address              => Rails.application.secrets.mailer_server,
+      :port                 => Rails.application.secrets.mailer_port,
+      :domain               => Rails.application.secrets.mailer_domain,
+      :authentication       => "plain",
+      :user_name            => Rails.application.secrets.mailer_user_name,
+      :password             => Rails.application.secrets.mailer_password,
+      :enable_starttls_auto => true
 
-	config.action_mailer.asset_host = Rails.application.secrets.mailer_asset_url
-	config.action_controller.asset_host = Rails.application.secrets.asset_url
+  }
+  # Print deprecation notices to the Rails logger
+  config.active_support.deprecation = :log
+  $stdout.sync = true
+
+  # Expands the lines which load the assets
+  config.assets.debug = true
+  config.serve_static_files = true
+
+  config.action_mailer.asset_host = Rails.application.secrets.mailer_asset_url
+  config.action_controller.asset_host = Rails.application.secrets.asset_url
 end

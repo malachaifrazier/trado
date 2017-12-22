@@ -13,7 +13,7 @@ module Store
         def settings
             setting_cache = Rails.cache.read("store_setting")
             if setting_cache.nil?
-                Rails.cache.write("store_setting", StoreSetting.includes(:attachment).first) 
+                Rails.cache.write("store_setting", StoreSetting.includes(:attachment).first)
                 setting_cache = Rails.cache.read("store_setting")
             end
             setting_cache
@@ -53,7 +53,7 @@ module Store
         # @param record [Array]
         def inactivate_all! records
             records.update_all(active: false)
-        end    
+        end
 
         # Parses the object's parent class name into a camelcase string
         #

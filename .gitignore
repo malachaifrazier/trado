@@ -1,11 +1,18 @@
-log/*
-tmp
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+tmp/cache/*
+/apidapter.log
+coverage
+report.html
+robocop.html
+
 *.DS_Store
 .env
 .ruby-version
 dump.rdb
 vendor/cache/*
-tmp/cache/*
+
 vendor/assets/components
 .gitkeep
 config/settings.yml

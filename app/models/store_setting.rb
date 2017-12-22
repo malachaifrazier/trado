@@ -23,19 +23,18 @@
 #
 
 class StoreSetting < ActiveRecord::Base
-    
-    attr_accessible :currency, :email, :name, :tax_name, :tax_rate, :tax_breakdown, :user_id, 
+
+    attr_accessible :currency, :email, :name, :tax_name, :tax_rate, :tax_breakdown, :user_id,
     :ga_active, :ga_code, :theme_name, :attachment_attributes, :locale
 
-    has_one :attachment,                                                  as: :attachable, dependent: :destroy
+    has_one :attachment, as: :attachable, dependent: :destroy
 
-    validates :name, :email, :tax_name, :currency, 
-    :tax_rate, :theme_name, :locale,                                      presence: true
+    validates :name, :email, :tax_name, :currency, :tax_rate, :theme_name, :locale, presence: true
 
     accepts_nested_attributes_for :attachment
 
     after_commit :reset_settings
-  
+
     def theme
         Theme.new(self.theme_name)
     end

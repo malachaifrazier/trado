@@ -8,11 +8,11 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += [ 'administration.js', 
+Rails.application.config.assets.precompile += [ 'administration.js',
                                 'administration.css',
-                                'custom.css', 
-                                'css3-fallback.js', 
-                                'modernizr/modernizr.js', 
+                                'custom.css',
+                                'css3-fallback.js',
+                                'modernizr/modernizr.js',
                                 'products.js',
                                 'admin/soca.datepicker.js',
                                 'admin/chart.js',

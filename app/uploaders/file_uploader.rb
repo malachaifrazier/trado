@@ -24,7 +24,7 @@ class FileUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [105,105]
   end
 
-  version :medium, :from_version => :large do 
+  version :medium, :from_version => :large do
     process resize_to_fill: [440,475]
   end
 

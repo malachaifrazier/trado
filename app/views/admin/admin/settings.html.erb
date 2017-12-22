@@ -94,7 +94,7 @@
       </fieldset>
     </div>
     <%= mailchimp_store_setting_fields(f) if Modulatron4000.mailchimp? %>
-    <%= stripe_store_setting_fields(f) if Modulatron4000.stripe? %>
+    <%= stripe_store_setting_fields(f)    if Modulatron4000.stripe? %>
     <div class="threecol">
       <h3><%= t('settings.google_analytics.header') %></h3>
       <p><%= t('settings.google_analytics.description') %></p>

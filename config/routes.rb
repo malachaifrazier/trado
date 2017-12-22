@@ -47,7 +47,7 @@ Trado::Application.routes.draw do
     collection do
       get :mycart
       get :checkout
-      %w( paypal stripe ).each do |payment|
+      %w(paypal stripe).each do |payment|
         post "#{payment}/confirm", to: "carts/#{payment}#confirm", as: "#{payment}_confirm"
       end
     end
