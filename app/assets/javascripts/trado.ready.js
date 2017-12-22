@@ -1,13 +1,13 @@
 var taxRate = gon.taxRate;
-     
+
 ready = function()
 {
     trado.misc.clearAllIntervals();
-    
+
     soca.animation.loading();
     soca.animation.colourCaveat();
     soca.animation.sidebarExtension();
-    
+
     soca.index.tableRowTarget();
     soca.index.sort('#sort-product');
     soca.index.filter('#filter-product-category');

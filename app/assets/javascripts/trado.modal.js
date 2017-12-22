@@ -1,8 +1,8 @@
 trado.modal =
 {
-    loading: function(trigger, target) 
+    loading: function(trigger, target)
     {
-        $(trigger).click(function() 
+        $(trigger).click(function()
         {
             $(target).modal(
             {
@@ -11,10 +11,10 @@ trado.modal =
             });
         });
     },
-    
+
     open: function(trigger, target)
     {
-        $(trigger).click(function() 
+        $(trigger).click(function()
         {
            $(target).modal('show');
            return false;
@@ -22,8 +22,8 @@ trado.modal =
     },
 
     ajaxOpen: function(elem, url, urlEnd)
-    {   
-        $('body').on('click', elem, function() 
+    {
+        $('body').on('click', elem, function()
         {
             // Stop the page transition animation style disabling the z-index order for the modal
             $('.main .container').removeClass('fadeIn');
@@ -42,7 +42,7 @@ trado.modal =
 
     resetEstimateDeliveryModel: function()
     {
-        $('#estimate-delivery-modal').on('hidden', function () 
+        $('#estimate-delivery-modal').on('hidden', function ()
         {
             $('.modal select').val("");
             $('.delivery-service-prices .control-group .controls').html("<p class='delivery-service-price-notice'> elect a country to view the available delivery services.</p>");

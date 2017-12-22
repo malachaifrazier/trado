@@ -3,35 +3,37 @@
 <% content_for :meta_description, @category.meta_description %>
 
 <div class="listing-products">
-    <div class="container">
-        <div class="row list-header">
-            <div class="col-lg-12 col-sm-12">
-                <h1>
-                    <%= @category.name %>
-                    <span>(<%= @category.products.published.count %>)</span>
-                </h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12 col-sm-12" id="list-wrapper">
-                <% @category.products.published.each do |product| %>
-                    <div class="col-lg-3 col-sm-3 list">
-                        <%= link_to [product.category, product] do %>
-                            <%= image_tag product.attachments.first.file.large, alt: product.name %>
-                        <% end %>
-                        <h3><%= Store::Price.new(price: product.first_available_sku.price, count: product.skus.count).range %></h3>
-                        <h2>
-                            <%= link_to product.name, [product.category, product] %>
-                        </h2>
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-6">
-                                <p><%= check_stock(product) %></p>
-                            </div>
-                        </div>
-                    </div>
-                <% end %>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row list-header">
+      <div class="col-lg-12 col-sm-12">
+        <h1>
+          <%= @category.name %>
+          <span>(<%= @category.products.published.count %>)</span>
+        </h1>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-sm-12" id="list-wrapper">
+        <% @category.products.published.each do |product| %>
+          <div class="col-lg-3 col-sm-3 list">
+            <%= link_to [product.category, product] do %>
+              <%= image_tag product.attachments.first.file.large, alt: product.name %>
+            <% end %>
+            <h3>
+              <%= Store::Price.new(price: product.first_available_sku.price, count: product.skus.count).range %>
+            </h3>
+            <h2>
+              <%= link_to product.name, [product.category, product] %>
+            </h2>
+            <div class="row">
+              <div class="col-lg-6 col-sm-6">
+                <p><%= check_stock(product) %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

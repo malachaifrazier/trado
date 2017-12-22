@@ -22,7 +22,7 @@ trado.app =
         }
     },
 
-    typeahead: function() 
+    typeahead: function()
     {
         $("#navSearchInput").typeahead(
         {
@@ -30,7 +30,7 @@ trado.app =
             template: " <div class='inner-suggest'> <img src='{{image.file.url}}' height='45' width='45'/> <span> <div>{{value}}</div> <div>{{category_name}}{{}}</div> </span> </div>",
             engine: Hogan,
             limit: 4
-        }).on("typeahead:selected", function($e, data) 
+        }).on("typeahead:selected", function($e, data)
         {
             return window.location = "/categories/" + data.category_slug + "/products/" + data.product_slug;
         });
@@ -40,19 +40,19 @@ trado.app =
     {
         var countrySelectElem = $('.update-delivery-service-price');
 
-        if (countrySelectElem.length > 0 && countrySelectElem.val() !== "") 
+        if (countrySelectElem.length > 0 && countrySelectElem.val() !== "")
             {
-                $.ajax( 
+                $.ajax(
                 {
                     url: '/delivery_service_prices/' + countrySelectElem.val(),
                     type: 'GET',
                     dataType: 'json',
-                    success: function(data) 
+                    success: function(data)
                     {
                         $('#delivery-services').html(data.table);
-                        $('#delivery-services input:radio').each(function() 
+                        $('#delivery-services input:radio').each(function()
                         {
-                            if ($(this).is(':checked')) 
+                            if ($(this).is(':checked'))
                             {
                                 trado.app.deliveryPriceCheckoutInfo($(this).parent().parent());
                                 $(this).parent().addClass('active');
@@ -60,14 +60,14 @@ trado.app =
                         });
                     }
                 });
-            } 
-            else 
+            }
+            else
             {
                 $('#delivery-services').html('<p>Please select a delivery country in order to view a list of available delivery services...</p>');
             }
     },
-    
-    selectDeliveryServicePrice: function() 
+
+    selectDeliveryServicePrice: function()
     {
         $('body').on('click', '#delivery-services table tbody tr', function()
         {
@@ -81,31 +81,31 @@ trado.app =
 
     updateDeliveryServicePrice: function()
     {
-        $('.update-delivery-service-price').change(function() 
+        $('.update-delivery-service-price').change(function()
         {
-            if (this.value !== "") 
+            if (this.value !== "")
             {
-                $.ajax( 
+                $.ajax(
                 {
                     url: '/delivery_service_prices/' + this.value,
                     type: 'GET',
                     dataType: 'json',
-                    success: function(data) 
+                    success: function(data)
                     {
                         $('#delivery-services').html(data.table);
-                        $('#delivery-services input:radio').each(function() 
+                        $('#delivery-services input:radio').each(function()
                         {
-                            if ($(this).is(':checked')) 
+                            if ($(this).is(':checked'))
                             {
                                 trado.app.deliveryPriceCheckoutInfo($(this).parent().parent());
-                                
+
                                 $(this).parent().addClass('active');
                             }
                         });
                     }
                 });
-            } 
-            else 
+            }
+            else
             {
                 $('#delivery-services').html('<p>Please select a delivery country in order to view a list of available delivery services...</p>');
             }
@@ -195,7 +195,7 @@ trado.app =
                 }
             });
             return false;
-        });   
+        });
     },
 
     deleteCartItem: function()

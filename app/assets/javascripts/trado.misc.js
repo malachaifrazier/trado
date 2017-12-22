@@ -1,12 +1,12 @@
 trado.misc =
 {
-    log: function(message) 
+    log: function(message)
     {
-        if (typeof console === 'object') 
+        if (typeof console === 'object')
         {
             return console.log(message);
-        } 
-        else 
+        }
+        else
         {
             return null;
         }
