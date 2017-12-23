@@ -15,6 +15,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  # config.fuubar_progress_bar_options = { format: ' Trado tests processing... <%B> %p%% %a' }
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -75,5 +77,4 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
-  config.fuubar_progress_bar_options = { :format => ' Trado tests processing... <%B> %p%% %a' }
 end
