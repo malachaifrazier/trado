@@ -6,6 +6,7 @@ tmp/cache/*
 coverage
 report.html
 robocop.html
+public/uploads/*
 
 *.DS_Store
 .env

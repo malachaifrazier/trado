@@ -9,6 +9,7 @@ class CategoriesController < ApplicationController
   private
 
   def set_category
-  @category ||= Category.includes(:products, :skus, :attachments).where(products: { status: 1, active: true } ).find(params[:id])
+    @category ||= Category.includes(:products, :skus, :attachments).
+      where(products: { status: 1, active: true } ).find(params[:id])
   end
 end

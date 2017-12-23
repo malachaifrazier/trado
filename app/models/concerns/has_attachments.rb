@@ -2,7 +2,7 @@ module HasAttachments
   extend ActiveSupport::Concern
 
   included do
-    validate :attachment_count, if: :published?, on: :create
+    validate :attachment_count, if: :published?
   end
 
   # Calculate if a product has at least one associated attachment
