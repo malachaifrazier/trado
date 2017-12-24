@@ -64,7 +64,7 @@ class Admin::SkusController < Admin::AdminBaseController
           new_variant.sku_id = @sku.id
           new_variant.save!
         end
-        CartItem.where(sku_id: @old_sku.id).destroy_all 
+        CartItem.where(sku_id: @old_sku.id).destroy_all
       end
       render json: { row: render_to_string(partial: 'admin/products/skus/single', locals: { sku: @sku }), sku_id: @sku.id }, status: 200
     else

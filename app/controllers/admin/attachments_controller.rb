@@ -7,7 +7,7 @@ class Admin::AttachmentsController < Admin::AdminBaseController
     render json: { modal: render_to_string(partial: 'admin/products/attachments/preview') }, status: 200
   end
 
-  def new 
+  def new
     set_product
     new_attachment
     render json: { modal: render_to_string(partial: 'admin/products/attachments/modal', locals: { url: admin_product_attachments_path, method: 'POST' }) }, status: 200

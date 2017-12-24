@@ -20,7 +20,7 @@ class Admin::DeliveryServicePricesController < Admin::AdminBaseController
   def create
     set_delivery_service
     @delivery_service_price = @delivery_service.prices.build(params[:delivery_service_price])
-    
+
     if @delivery_service_price.save
       flash_message :success, t('controllers.admin.delivery_service_prices.create.valid')
       redirect_to admin_delivery_service_delivery_service_prices_url

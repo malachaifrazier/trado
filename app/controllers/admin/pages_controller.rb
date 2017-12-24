@@ -23,7 +23,7 @@ class Admin::PagesController < Admin::AdminBaseController
   end
 
   private
-  
+
   def set_page
     @page ||= Page.find(params[:id])
   end

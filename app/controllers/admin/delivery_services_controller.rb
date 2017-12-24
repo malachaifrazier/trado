@@ -33,11 +33,13 @@ class Admin::DeliveryServicesController < Admin::AdminBaseController
   def update
     set_delivery_service
     set_all_countries
+
     unless @delivery_service.orders.empty?
       Store.inactivate!(@delivery_service)
       @old_delivery_service = @delivery_service
       @delivery_service = DeliveryService.new
     end
+
     @delivery_service.attributes = params[:delivery_service]
 
     if @delivery_service.save
@@ -63,12 +65,14 @@ class Admin::DeliveryServicesController < Admin::AdminBaseController
   def destroy
     set_delivery_service
     set_all_countries
+
     if @delivery_service.orders.empty?
       @result = Store.last_record(@delivery_service, DeliveryService.active.load.count)
     else
       Store.inactivate!(@delivery_service)
       Store.inactivate_all!(@delivery_service.prices)
     end
+
     @result = [:success, t('controllers.admin.delivery_services.destroy.valid')] if @result.nil?
     flash_message @result[0], @result[1]
     redirect_to admin_delivery_services_url
