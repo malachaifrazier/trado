@@ -1,17 +1,12 @@
 module Renderer
-
   # Renders a view.
   def self.render options = {}
-
     # Pass a hash of local variables as :assigns.
     assigns = options.delete(:assigns) || {}
-
     # Create a view.
     view = view_class.new ActionController::Base.view_paths, assigns
-
     # Mix in other helpers you need.
     view.extend ApplicationHelper
-    
     # Render.
     view.render options
   end
