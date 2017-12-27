@@ -5,7 +5,7 @@
 
 <div class="twelvecol">
   <div class="page-header">
-    <%= link_to cancel_admin_order_path(@order), :class => "btn btn-red btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('orders.show.cancel_order_tooltip'), method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <%= link_to cancel_admin_order_path(@order), class: "btn btn-red btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('orders.show.cancel_order_tooltip'), method: :delete, data: { confirm: 'Are you sure?' } do %>
       <i class="icon-close"></i>
     <% end %>
     <a href="#" data-record-id="<%= @order.id %>" class="edit-order-record btn btn-blue btn-large" data-placement="bottom" data-toggle="tooltip" title="Edit Order">
@@ -23,7 +23,7 @@
       <h3><%= t('orders.show.delivery_details.header') %></h3>
     </div>
     <div class="widget widget-content" id="delivery-details">
-      <div id="email"> 
+      <div id="email">
         <p><b><%= t('orders.show.delivery_details.email') %></b>: <%= @order.email %></p>
       </div>
       <div id="delivery-status">

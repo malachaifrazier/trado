@@ -6,15 +6,15 @@
   <fieldset class="widget widget-content">
     <div class="form-group">
       <%= f.label t('delivery_services.form.delivery_service_details.courier_name_label') %>
-      <%= f.text_field :courier_name, :class => 'form-control' %>
+      <%= f.text_field :courier_name, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label t('delivery_services.form.delivery_service_details.name_label') %>
-      <%= f.text_field :name, :class => 'form-control' %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
     <div class="form-group form-last">
       <%= f.label t('delivery_services.form.delivery_service_details.description_label') %>
-      <%= f.text_area :description, :class => 'form-control', rows: 7 %>
+      <%= f.text_area :description, class: 'form-control', rows: 7 %>
     </div>
   </fieldset>
 </div>
@@ -26,9 +26,9 @@
   <fieldset class="widget widget-content">
     <div class="form-group form-field-range form-last">
       <%= f.label t('delivery_services.form.order_constraints.price_range_label') %>
-      <%= f.text_field :order_price_minimum, :class => 'form-control' %>
+      <%= f.text_field :order_price_minimum, class: 'form-control' %>
       <div class="divider"></div>
-      <%= f.text_field :order_price_maximum, :class => 'form-control' %>
+      <%= f.text_field :order_price_maximum, class: 'form-control' %>
     </div>
   </fieldset>
 </div>
@@ -40,10 +40,10 @@
   <fieldset class="widget widget-content">
     <div class="form-group form-last">
       <%= f.label t('delivery_services.form.tracking.tracking_url_label') %>
-      <%= f.text_field :tracking_url, :class => 'form-control' %>
+      <%= f.text_field :tracking_url, class: 'form-control' %>
     </div>
   </fieldset>
-  
+
 </div>
 <div class="threecol">
   <h3><%= t('delivery_services.form.countries.header') %></h3>
@@ -54,10 +54,10 @@
 <div class="ninecol last">
   <fieldset class="widget widget-content widget-last">
     <div class="form-group form-last">
-      <%= f.collection_select :country_ids, @countries.order(name: :asc), :id, :name, {}, {:class => 'chosen', multiple: true, data: {placeholder: t('delivery_services.form.countries.country_placeholder')}} %>
+      <%= f.collection_select :country_ids, @countries.order(name: :asc), :id, :name, {}, {class: 'chosen', multiple: true, data: {placeholder: t('delivery_services.form.countries.country_placeholder')}} %>
     </div>
   </fieldset>
   <div class="form-action">
-    <%= f.submit t('delivery_services.form.submit_button'), :class => 'btn btn-blue btn-large' %>
+    <%= f.submit t('delivery_services.form.submit_button'), class: 'btn btn-blue btn-large' %>
   </div>
 </div>

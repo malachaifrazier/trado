@@ -1,14 +1,14 @@
 <div aria-hidden="true" aria-labelledby="stockAdjustmentModalLabel" class="modal fade" id="stock-adjustment-form" role="dialog" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for [:admin, @product, @sku, @stock_adjustment], html: { role: 'form', :class => 'amend-stock-adjustment' }, remote: true do |f| %>
+      <%= form_for [:admin, @product, @sku, @stock_adjustment], html: { role: 'form', class: 'amend-stock-adjustment' }, remote: true do |f| %>
         <div class="json" id="errors">
           <ul></ul>
         </div>
         <%= render partial: 'shared/loading', format: [:html] %>
         <div class="modal-header">
           <h3 id="stockAdjustmentModalLabel">
-            <%= t('products.skus.stock_adjustments.modal.header') %> 
+            <%= t('products.skus.stock_adjustments.modal.header') %>
             <%= @sku.full_sku %>
           </h3>
         </div>
@@ -22,17 +22,19 @@
           <fieldset class="widget widget-content widget-last">
             <div class="form-group">
               <%= f.label t('products.skus.stock_adjustments.modal.description_label') %>
-              <%= f.text_field :description, :class => 'form-control' %>
+              <%= f.text_field :description, class: 'form-control' %>
             </div>
             <div class="form-group form-last">
               <%= f.label t('products.skus.stock_adjustments.modal.adjustment_label') %>
-              <%= f.text_field :adjustment, :class => 'form-control' %>
+              <%= f.text_field :adjustment, class: 'form-control' %>
             </div>
           </fieldset>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-orange btn-large" data-dismiss="modal" type="button"><%= t('modal.close_button') %></button>
-          <%= f.submit t('products.skus.stock_adjustments.modal.submit_button'), :class => 'btn btn-blue btn-large' %>
+          <button class="btn btn-orange btn-large" data-dismiss="modal" type="button">
+            <%= t('modal.close_button') %>
+          </button>
+          <%= f.submit t('products.skus.stock_adjustments.modal.submit_button'), class: 'btn btn-blue btn-large' %>
         </div>
       <% end %>
     </div>

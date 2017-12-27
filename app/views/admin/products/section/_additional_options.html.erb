@@ -11,8 +11,8 @@
       </label>
     </div>
     <div class="form-group form-last">
-        <label><%= t('products.form.additional_options.tags_label') %></label>
-        <%= text_field_tag :taggings, params[:taggings], 'data-role' => 'tagsinput', value: @product.tags.map(&:name).join(",") %>
+      <label><%= t('products.form.additional_options.tags_label') %></label>
+      <%= text_field_tag :taggings, params[:taggings], 'data-role' => 'tagsinput', value: @product.tags.map(&:name).join(",") %>
     </div>
   </fieldset>
 </div>

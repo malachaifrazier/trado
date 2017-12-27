@@ -29,11 +29,11 @@
       <fieldset class="widget widget-content widget-last">
         <div class="form-group">
           <%= f.label t('users.edit.profile_settings.first_name_label') %>
-          <%= f.text_field :first_name, :class => 'form-control' %>
+          <%= f.text_field :first_name, class: 'form-control' %>
         </div>
         <div class="form-group">
           <%= f.label t('users.edit.profile_settings.last_name_label') %>
-          <%= f.text_field :last_name, :class => 'form-control' %>
+          <%= f.text_field :last_name, class: 'form-control' %>
         </div>
         <%= f.fields_for :attachment do |ff| %>
           <div class="form-group">
@@ -48,7 +48,7 @@
         <% end %>
       </fieldset>
       <div class="form-action">
-        <%= f.submit t('users.edit.submit_button'), :class => 'btn btn-blue btn-large' %>
+        <%= f.submit t('users.edit.submit_button'), class: 'btn btn-blue btn-large' %>
       </div>
     </div>
   <% end %>

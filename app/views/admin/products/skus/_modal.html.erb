@@ -1,7 +1,7 @@
 <div aria-hidden="true" aria-labelledby="skuModalLabel" class="modal fade" id="sku-form" role="dialog" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for [:admin, @product, @form_sku], url: url, html: { role: 'form', :class => 'amend-sku', 'data-method' => method }, remote: true do |f| %>
+      <%= form_for [:admin, @product, @form_sku], url: url, html: { role: 'form', class: 'amend-sku', 'data-method' => method }, remote: true do |f| %>
         <div class="json" id="errors">
           <ul></ul>
         </div>
@@ -21,7 +21,7 @@
                       <label><%= type.name %></label>
                       <%= f.fields_for :variants do |ff |%>
                         <%= ff.hidden_field :variant_type_id, value: type.id %>
-                        <%= ff.text_field :name, :class => 'form-control' %>
+                        <%= ff.text_field :name, class: 'form-control' %>
                       <% end %>
                     </div>
                   </div>
@@ -32,7 +32,7 @@
                     <div class="form-group">
                       <label><%= variant.variant_type.name %></label>
                       <%= f.fields_for :variants, variant do |ff |%>
-                        <%= ff.text_field :name, :class => 'form-control' %>
+                        <%= ff.text_field :name, class: 'form-control' %>
                       <% end %>
                     </div>
                   </div>
@@ -44,30 +44,30 @@
                   <div class="form-group">
                     <%= f.label t('products.form.skus.modal.code_label') %>
                     <% if @form_sku.code.nil? %>
-                      <%= f.text_field :code, :class => 'form-control' %>
+                      <%= f.text_field :code, class: 'form-control' %>
                     <% else %>
                       <div class="form-disabled form-disabled-green"><%= @form_sku.code %></div>
                     <% end %>
                   </div>
-              </div>  
+              </div>
             </div>
             <div class="row">
               <div class="fourcol">
                 <div class="form-group">
                   <%= f.label t('products.form.skus.modal.length_label') %>
-                  <%= f.text_field :length, :class => 'form-control' %>
+                  <%= f.text_field :length, class: 'form-control' %>
                 </div>
               </div>
               <div class="fourcol">
                 <div class="form-group">
                   <%= f.label t('products.form.skus.modal.weight_label') %>
-                  <%= f.text_field :weight, :class => 'form-control' %>
+                  <%= f.text_field :weight, class: 'form-control' %>
                 </div>
               </div>
               <div class="fourcol last">
                 <div class="form-group">
                   <%= f.label t('products.form.skus.modal.thickness_label') %>
-                  <%= f.text_field :thickness, :class => 'form-control' %>
+                  <%= f.text_field :thickness, class: 'form-control' %>
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@
                   <div class="form-group">
                     <%= f.label t('products.form.skus.modal.stock_label') %>
                     <% if @form_sku.stock.nil? %>
-                      <%= f.text_field :stock, :class => 'form-control' %>
+                      <%= f.text_field :stock, class: 'form-control' %>
                     <% else %>
                       <div class="form-disabled form-disabled-green"><%= @form_sku.stock %></div>
                     <% end %>
@@ -85,7 +85,7 @@
               <div class="sixcol last">
                 <div class="form-group">
                   <%= f.label t('products.form.skus.modal.stock_warning_level_label') %>
-                  <%= f.text_field :stock_warning_level, :class => 'form-control' %>
+                  <%= f.text_field :stock_warning_level, class: 'form-control' %>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@
                   <%= f.label t('products.form.skus.modal.cost_value_label') %>
                   <div class="form-prefix">
                     <span><%= Store.settings.currency_symbol %></span>
-                    <%= f.text_field :cost_value, :class => 'form-control calculate-tax' %>
+                    <%= f.text_field :cost_value, class: 'form-control calculate-tax' %>
                   </div>
                 </div>
               </div>
@@ -104,7 +104,7 @@
                   <%= f.label t('products.form.skus.modal.price_label') %>
                   <div class="form-prefix">
                     <span><%= Store.settings.currency_symbol %></span>
-                    <%= f.text_field :price, :class => 'form-control calculate-tax' %>
+                    <%= f.text_field :price, class: 'form-control calculate-tax' %>
                   </div>
                 </div>
               </div>
@@ -113,7 +113,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-orange btn-large" data-dismiss="modal" type="button"><%= t('modal.close_button') %></button>
-          <%= f.submit t('products.form.skus.modal.submit_button'), :class => 'btn btn-blue btn-large' %>
+          <%= f.submit t('products.form.skus.modal.submit_button'), class: 'btn btn-blue btn-large' %>
         </div>
       <% end %>
     </div>

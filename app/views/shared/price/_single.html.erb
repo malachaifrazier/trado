@@ -1,8 +1,8 @@
 <div class="price">
-    <% if Store.settings.tax_breakdown %>
-        <%= net_price %>
-        <span class="tax-suffix"><%= "#{gross_price} inc #{Store.settings.tax_name}" %></span>
-    <% else %>
-        <%= gross_price %>
-    <% end %>
+  <% if Store.settings.tax_breakdown %>
+    <%= net_price %>
+    <span class="tax-suffix"><%= "#{gross_price} inc #{Store.settings.tax_name}" %></span>
+  <% else %>
+    <%= gross_price %>
+  <% end %>
 </div>

@@ -2,7 +2,7 @@
 <% content_for :breadcrumb, t('delivery_services.index.breadcrumb') %>
 <div class="twelvecol">
   <div class="page-header">
-    <%= link_to new_admin_delivery_service_path, :class => "btn btn-blue btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('delivery_services.index.add_tooltip') do %>
+    <%= link_to new_admin_delivery_service_path, class: "btn btn-blue btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('delivery_services.index.add_tooltip') do %>
       <i class="icon-plus"></i>
     <% end %>
     <h2 class="widget widget-header"><%= t('delivery_services.index.header') %></h2>

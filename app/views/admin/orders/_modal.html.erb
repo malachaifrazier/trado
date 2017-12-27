@@ -20,13 +20,13 @@
              </div>
             <div class="form-group form-last">
               <%= f.label t('orders.edit.modal.consignment_number_label') %>
-              <%= f.text_field :consignment_number, :class => 'form-control' %>
+              <%= f.text_field :consignment_number, class: 'form-control' %>
             </div>
           </fieldset>
         </div>
         <div class="modal-footer">
           <button class="btn btn-orange btn-large" data-dismiss="modal" type="button"><%= t('modal.close_button') %></button>
-          <%= f.submit t('orders.edit.modal.submit_button'), :class => 'btn btn-blue btn-large' %>
+          <%= f.submit t('orders.edit.modal.submit_button'), class: 'btn btn-blue btn-large' %>
         </div>
       <% end %>
     </div>

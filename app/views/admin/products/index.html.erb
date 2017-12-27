@@ -3,10 +3,10 @@
 
 <div class="twelvecol">
   <div class="page-header">
-    <%= link_to new_admin_product_path, :class => "btn btn-blue btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('products.index.add_product_tooltip') do %>
+    <%= link_to new_admin_product_path, class: "btn btn-blue btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('products.index.add_product_tooltip') do %>
       <i class="icon-plus"></i>
     <% end %>
-    <%= link_to admin_products_stock_index_path, :class => "btn btn-blue btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('products.index.stock_management_tooltip') do %>
+    <%= link_to admin_products_stock_index_path, class: "btn btn-blue btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('products.index.stock_management_tooltip') do %>
       <i class="icon-bars"></i>
     <% end %>
     <h2 class="widget widget-header"><%= t('products.index.header') %></h2>

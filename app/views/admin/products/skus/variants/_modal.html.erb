@@ -16,17 +16,17 @@
             <% @variant_types.each do |type| %>
               <div class="form-group">
                 <%= label_tag type.name %>
-                <%= text_field_tag type.name.downcase, params[type.name.to_sym], value: @product.variant_collection_by_type(type.name).map(&:name).join(","), :class => 'tagsinput' %>
+                <%= text_field_tag type.name.downcase, params[type.name.to_sym], value: @product.variant_collection_by_type(type.name).map(&:name).join(","), class: 'tagsinput' %>
               </div>
             <% end %>
           </fieldset>
         </div>
         <div class="modal-footer">
           <% unless @product.active_skus.empty? %>
-            <%= link_to t('products.skus.variants.modal.reset_button'), destroy_admin_product_skus_variants_path(product_id: @product.id), remote: true, id: 'reset-sku-variants-button', :class => 'btn btn-red btn-large float-left' %>
+            <%= link_to t('products.skus.variants.modal.reset_button'), destroy_admin_product_skus_variants_path(product_id: @product.id), remote: true, id: 'reset-sku-variants-button', class: 'btn btn-red btn-large float-left' %>
           <% end %>
           <button class="btn btn-orange btn-large" data-dismiss="modal" type="button"><%= t('modal.close_button') %></button>
-          <%= submit_tag t('products.skus.variants.modal.submit_button'), :class => 'btn btn-blue btn-large' %>
+          <%= submit_tag t('products.skus.variants.modal.submit_button'), class: 'btn btn-blue btn-large' %>
         </div>
       <% end %>
     </div>

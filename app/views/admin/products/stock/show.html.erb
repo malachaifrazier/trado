@@ -5,7 +5,7 @@
 
 <div class="twelvecol">
   <div class="page-header">
-    <%= link_to new_admin_product_sku_stock_adjustment_path(@sku.product, @sku), remote: true, id: 'add-stock-adjustment-button', :class => "btn btn-blue btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('products.stock.show.add_stock_adjustment_tooltip') do %>
+    <%= link_to new_admin_product_sku_stock_adjustment_path(@sku.product, @sku), remote: true, id: 'add-stock-adjustment-button', class: "btn btn-blue btn-large", "data-placement" => "bottom", "data-toggle" => "tooltip", title: t('products.stock.show.add_stock_adjustment_tooltip') do %>
       <i class="icon-plus"></i>
     <% end %>
     <h2 class="widget widget-header"><%= @sku.full_sku %> <%= t('products.stock.show.header') %></h2>

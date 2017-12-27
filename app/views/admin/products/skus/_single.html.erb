@@ -1,15 +1,15 @@
 <td><%= sku.code %></td>
 <% sku.variants.each do |variant| %>
-    <td><%= variant.name %></td>
+  <td><%= variant.name %></td>
 <% end %>
 <td><%= sku.stock %></td>
 <td><%= Store::Price.new(price: sku.cost_value).single %></td>
 <td><%= Store::Price.new(price: sku.price).single %></td>
 <td class="table-actions">
-    <%= link_to edit_admin_product_sku_path(product_id: sku.product.id, id: sku.id), remote: true, :class => 'edit-sku-button' do %>
-        <i class="icon-pencil"></i>
-    <% end %>
-    <%= link_to admin_product_sku_path(product_id: sku.product.id, id: sku.id), remote: true, :class => "#{Store.class_name_id(sku)}-delete" do %>
-        <i class="icon-remove"></i>
-    <% end %>
+  <%= link_to edit_admin_product_sku_path(product_id: sku.product.id, id: sku.id), remote: true, class: 'edit-sku-button' do %>
+    <i class="icon-pencil"></i>
+  <% end %>
+  <%= link_to admin_product_sku_path(product_id: sku.product.id, id: sku.id), remote: true, class: "#{Store.class_name_id(sku)}-delete" do %>
+    <i class="icon-remove"></i>
+  <% end %>
 </td>

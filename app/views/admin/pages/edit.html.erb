@@ -3,14 +3,14 @@
 <% breadcrumb_add t('pages.edit.pages_index'), admin_pages_path %>
 
 <div class="twelvecol">
-    <div class="page-header">
-        <h2 class="widget widget-header"><%= t('pages.edit.header') %></h2>
+  <div class="page-header">
+    <h2 class="widget widget-header"><%= t('pages.edit.header') %></h2>
+  </div>
+  <%= form_for [:admin, @page], html: { role: 'form' } do |f| %>
+    <div class="threecol"></div>
+    <div class="ninecol last">
+      <%= render partial: 'shared/errors', locals: { object: @page } %>
     </div>
-    <%= form_for [:admin, @page], html: { role: 'form' } do |f| %>
-        <div class="threecol"></div>
-        <div class="ninecol last">
-            <%= render partial: 'shared/errors', locals: { object: @page } %>
-        </div>
-        <%= render partial: "form", locals: { f: f } %>
-    <% end %>
+    <%= render partial: "form", locals: { f: f } %>
+  <% end %>
 </div>

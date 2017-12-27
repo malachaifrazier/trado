@@ -5,14 +5,14 @@
   <%= link_to t('products.form.skus.add_variant'), new_admin_product_sku_path(product_id: @product.id), remote: true, class: @product.skus.empty? ? "btn btn-green btn-normal hide" : "btn btn-green btn-normal", id: 'add-sku-button' %>
 </div>
 <div class="ninecol last">
-    <fieldset class="widget widget-content" id="skus">
-        <% if @skus.empty? %>
-          <div class="helper-notification">
-            <p><%= t('products.form.skus.no_records') %></p>
-            <i class="icon-tags"></i>
-          </div>
-        <% else %>
-            <%= render partial: 'admin/products/skus/table', format: [:html] %>
-        <% end %>
-    </fieldset>
+  <fieldset class="widget widget-content" id="skus">
+    <% if @skus.empty? %>
+      <div class="helper-notification">
+        <p><%= t('products.form.skus.no_records') %></p>
+        <i class="icon-tags"></i>
+      </div>
+    <% else %>
+      <%= render partial: 'admin/products/skus/table', format: [:html] %>
+    <% end %>
+  </fieldset>
 </div>

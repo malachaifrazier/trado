@@ -1,22 +1,22 @@
 <% if datasets.empty? %>
 <div class="empty-pie-chart">
-    <p>No data available</p>
+  <p>No data available</p>
 </div>
 <% else %>
-    <canvas id="piePaymentTypeChart" width="300" height="300" class="pie-chart"></canvas>
-    <script>
-    //<![CDATA[
-        var data<%= id %> = [
-            <% datasets.each do |set| %>
-                {
-                    value: <%= set.last[:value] %>,
-                    color: "<%= set.last[:color] %>",
-                    label: "<%= set.first.to_s.titleize %>"
-                },
-            <% end %>
-        ];
-        var <%= id %>ctx = $("#<%= id %>").get(0).getContext("2d");
-        var <%= id %> = new Chart(<%= id %>ctx).Doughnut(data<%= id %>);
-    //]]>
-    </script>
+  <canvas id="piePaymentTypeChart" width="300" height="300" class="pie-chart"></canvas>
+  <script>
+  //<![CDATA[
+    var data<%= id %> = [
+      <% datasets.each do |set| %>
+        {
+          value: <%= set.last[:value] %>,
+          color: "<%= set.last[:color] %>",
+          label: "<%= set.first.to_s.titleize %>"
+        },
+      <% end %>
+    ];
+    var <%= id %>ctx = $("#<%= id %>").get(0).getContext("2d");
+    var <%= id %> = new Chart(<%= id %>ctx).Doughnut(data<%= id %>);
+  //]]>
+  </script>
 <% end %>
