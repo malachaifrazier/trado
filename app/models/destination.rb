@@ -13,10 +13,8 @@
 #
 
 class Destination < ActiveRecord::Base
-
   attr_accessible :country_id, :delivery_service_id
 
   belongs_to :country
   belongs_to :delivery_service
-
 end

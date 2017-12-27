@@ -22,23 +22,22 @@ class Accessory < ActiveRecord::Base
   attr_accessible :name, :part_number, :price, :weight, :cost_value, :active
 
   has_many :cart_item_accessories
-  has_many :cart_items,                                   through: :cart_item_accessories
-  has_many :carts,                                        through: :cart_items
-  has_many :order_item_accessories,                       dependent: :restrict_with_exception
-  has_many :order_items,                                  through: :order_item_accessories, dependent: :restrict_with_exception
-  has_many :orders,                                       through: :order_items
-  has_many :accessorisations,                             dependent: :destroy
-  has_many :products,                                     through: :accessorisations
+  has_many :cart_items,             through: :cart_item_accessories
+  has_many :carts,                  through: :cart_items
+  has_many :products,               through: :accessorisations
+  has_many :order_items,            through: :order_item_accessories, dependent: :restrict_with_exception
+  has_many :orders,                 through: :order_items
+  has_many :accessorisations,       dependent: :destroy
+  has_many :order_item_accessories, dependent: :restrict_with_exception
 
-  validates :name, :part_number, :weight,
-  :price,                                                 presence: true, uniqueness: { scope: :active }
+
+  validates :name, :part_number, :weight, :price, presence: true, uniqueness: { scope: :active }
 
   after_update :update_cart_item_accessories_weight
 
   include ActiveScope
-  
+
   # If the record's weight has changed, update all associated cart_item_accessorie parent cart_item records with the new weight
-  #
   def update_cart_item_accessories_weight
     if self.weight_changed?
       cart_item_accessories = CartItemAccessory.where(:accessory_id => id)

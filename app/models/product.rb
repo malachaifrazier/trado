@@ -1,6 +1,6 @@
 # Product Documentation
 #
-# The product table contains the global data for any given product. 
+# The product table contains the global data for any given product.
 # It has associations to attachments, tags and skus.
 # More detailed information and different product variations are maintained within the Sku table.
 # == Schema Information
@@ -32,47 +32,49 @@ class Product < ActiveRecord::Base
   include HasSkus
   include HasAttachments
 
-  attr_accessible :name, :page_title, :meta_description, :description, :weighting, :sku, :part_number, 
+  attr_accessible :name, :page_title, :meta_description, :description, :weighting, :sku, :part_number,
   :accessory_ids, :attachments_attributes, :tags_attributes, :skus_attributes, :category_id, :featured,
   :short_description, :related_ids, :active, :status, :order_count, :variant_ids
 
-  has_many :skus,                                             dependent: :destroy, inverse_of: :product
-  has_many :variants,                                         through: :skus, class_name: 'SkuVariant'
-  has_many :variant_types,                                    -> { uniq }, through: :variants
-  has_many :active_skus,                                      -> { where(active: true) }, class_name: 'Sku'
-  has_many :active_sku_variants,                              through: :active_skus, class_name: 'SkuVariant', source: :variants
-  has_many :orders,                                           through: :skus
-  has_many :carts,                                            through: :skus
-  has_many :taggings,                                         dependent: :destroy
-  has_many :tags,                                             through: :taggings, dependent: :destroy
-  has_many :attachments,                                      as: :attachable, dependent: :destroy
-  has_many :accessorisations,                                 dependent: :destroy
-  has_many :accessories,                                      through: :accessorisations
-  has_and_belongs_to_many :related,                           class_name: "Product", 
-                                                              join_table: :related_products, 
-                                                              foreign_key: :product_id, 
-                                                              association_foreign_key: :related_id
+  has_many :variant_types,       -> { uniq }, through: :variants
+  has_many :active_skus,         -> { where(active: true) }, class_name: 'Sku'
+
+  has_many :variants,            through: :skus,        class_name: 'SkuVariant'
+  has_many :active_sku_variants, through: :active_skus, class_name: 'SkuVariant', source: :variants
+  has_many :orders,              through: :skus
+  has_many :carts,               through: :skus
+  has_many :accessories,         through: :accessorisations
+  has_many :tags,                through: :taggings,  dependent: :destroy
+
+  has_many :skus,                dependent: :destroy, inverse_of: :product
+  has_many :taggings,            dependent: :destroy
+  has_many :accessorisations,    dependent: :destroy
+
+  has_many :attachments,         as: :attachable, dependent: :destroy
+  has_and_belongs_to_many :related, class_name: "Product", join_table: :related_products,
+                                                           foreign_key: :product_id,
+                                                           association_foreign_key: :related_id
   belongs_to :category
 
-  validates :name, :sku, :part_number,                        presence: true
-  validates :meta_description, :description, 
-  :weighting, :category_id, :page_title,                      presence: true, if: :published?
-  validates :part_number, :sku, :name,                        uniqueness: { scope: :active }
-  validates :page_title,                                      length: { maximum: 70, message: :too_long }
-  validates :meta_description,                                length: { maximum: 150, message: :too_long }, if: :published?
-  validates :name,                                            length: { minimum: 10, message: :too_short }, if: :published?
-  validates :description,                                     length: { minimum: 20, message: :too_short }, if: :published?
-  validates :short_description,                               length: { maximum: 300, message: :too_long }, if: :published?
+  validates :meta_description, :description,
+  :weighting, :category_id, :page_title,  presence: true, if: :published?
+  validates :name, :sku, :part_number,    presence: true
+  validates :part_number, :sku, :name,    uniqueness: { scope: :active }
+  validates :page_title,                  length: { maximum: 70, message: :too_long }
+  validates :meta_description,            length: { maximum: 150, message: :too_long }, if: :published?
+  validates :name,                        length: { minimum: 10, message: :too_short }, if: :published?
+  validates :description,                 length: { minimum: 20, message: :too_short }, if: :published?
+  validates :short_description,           length: { maximum: 300, message: :too_long }, if: :published?
 
   accepts_nested_attributes_for :skus
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :attachments
-  
+
   default_scope { order(weighting: :desc) }
 
-  scope :published_or_archived,                               -> { where(status: [1,2]) } 
-  scope :active_non_archived,                                 -> { active.where.not(status: 2) }
-  scope :search,                                              ->(query, page, per_page_count, limit_count) { joins(:tags).where("lower(products.name) LIKE :search OR lower(products.sku) LIKE :search OR lower(tags.name) LIKE :search", search: "%#{query}%").uniq.limit(limit_count).page(page).per(per_page_count) }
+  scope :published_or_archived, -> { where(status: [1,2]) }
+  scope :active_non_archived,   -> { active.where.not(status: 2) }
+  scope :search,                -> (query, page, per_page_count, limit_count) { joins(:tags).where("lower(products.name) LIKE :search OR lower(products.sku) LIKE :search OR lower(tags.name) LIKE :search", search: "%#{query}%").uniq.limit(limit_count).page(page).per(per_page_count) }
 
   enum status: [:draft, :published, :archived]
 
@@ -82,7 +84,7 @@ class Product < ActiveRecord::Base
   def variant_collection_by_type variant_type
     variants.joins(:variant_type).where(variant_types: { name: variant_type })
   end
-  
+
   # If a product has only one SKU it returns true
   # Else if the product has more than one SKU, returns false
   #

@@ -1,6 +1,6 @@
 # Sku Documentation
 #
-# The Sku table manages all the product variations. 
+# The Sku table manages all the product variations.
 # == Schema Information
 #
 # Table name: skus
@@ -21,44 +21,45 @@
 #
 
 class Sku < ActiveRecord::Base
-  
-  attr_accessible :cost_value, :price, :code, :stock, :stock_warning_level, :length, 
+  include ActiveScope
+
+  attr_accessible :cost_value, :price, :code, :stock, :stock_warning_level, :length,
   :weight, :thickness, :product_id, :accessory_id, :active, :variants_attributes, :duplicate, :stock_adjustment_attributes
 
   attr_accessor :duplicate
-  
-  has_many :cart_items
-  has_many :carts,                                                    through: :cart_items
-  has_many :order_items,                                              dependent: :restrict_with_exception
-  has_many :orders,                                                   through: :order_items, dependent: :restrict_with_exception
-  has_many :notifications,                                            as: :notifiable, dependent: :destroy
-  has_many :active_notifications,                                     -> { where(sent: false) }, class_name: 'Notification', as: :notifiable
-  has_many :stock_adjustments,                                        dependent: :destroy
-  has_one :category,                                                  through: :product
-  belongs_to :product,                                                inverse_of: :skus
-  has_many :variants,                                                 dependent: :destroy, class_name: 'SkuVariant', inverse_of: :sku
-  has_many :variant_types,                                            -> { uniq }, through: :variants
 
-  validates :price, :cost_value, :length, 
-  :weight, :thickness, :code,                                         presence: true
-  validates :price, :cost_value,                                      format: { with: /\A(\$)?(\d+)(\.|,)?\d{0,2}?\z/ }
-  validates :length, :weight, :thickness,                             numericality: { greater_than_or_equal_to: 0 }
-  validates :stock, :stock_warning_level,                             presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }, if: :new_non_duplicate?
-  validate :stock_values,                                             on: :create, if: :new_non_duplicate?
-  validates :code,                                                    uniqueness: { scope: [:product_id, :active] }
+  has_many :cart_items
+  has_many :carts,   through: :cart_items
+  has_many :orders,  through: :order_items, dependent: :restrict_with_exception
+  has_one :category, through: :product
+
+  has_many :notifications, as: :notifiable, dependent: :destroy
+
+  has_many :variants,          dependent: :destroy, class_name: 'SkuVariant', inverse_of: :sku
+  has_many :order_items,       dependent: :restrict_with_exception
+  has_many :stock_adjustments, dependent: :destroy
+
+  has_many :variant_types,        -> { uniq }, through: :variants
+  has_many :active_notifications, -> { where(sent: false) }, class_name: 'Notification', as: :notifiable
+
+  belongs_to :product, inverse_of: :skus
+
+  validates :price, :cost_value, :length, :weight, :thickness, :code, presence: true
+  validates :price, :cost_value, format: { with: /\A(\$)?(\d+)(\.|,)?\d{0,2}?\z/ }
+  validates :length, :weight, :thickness, numericality: { greater_than_or_equal_to: 0 }
+  validates :stock, :stock_warning_level, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }, if: :new_non_duplicate?
+  validate :stock_values, on: :create, if: :new_non_duplicate?
+  validates :code, uniqueness: { scope: [:product_id, :active] }
   validate :variant_duplication
 
-  after_update :update_cart_items_weight                             
-  
-  before_destroy :set_product_as_draft,                               if: :last_active_sku?
+  after_update :update_cart_items_weight
+  before_destroy :set_product_as_draft, if: :last_active_sku?
 
   accepts_nested_attributes_for :variants, :stock_adjustments
 
-  scope :complete,                                                    -> { where('stock IS NOT NULL') }
-  scope :in_stock,                                                    -> { where('stock > ?', 0) }
-  scope :active_non_archived,                                         -> { includes(:product).active.where.not(products: { status: 2 }) }
-
-  include ActiveScope
+  scope :complete,            -> { where('stock IS NOT NULL') }
+  scope :in_stock,            -> { where('stock > ?', 0) }
+  scope :active_non_archived, -> { includes(:product).active.where.not(products: { status: 2 }) }
 
   # Validation check to ensure the stock value is higher than the stock warning level value when creating a new SKU
   #
@@ -94,8 +95,8 @@ class Sku < ActiveRecord::Base
     @new_variant = self.variants.map{|v| v.name}.join('/')
     @all_associated_variants = self.product.active_skus.where.not(id: self.id).map{|s| s.variants.map{|v| v.name}.join('/') }
     if @all_associated_variants.include?(@new_variant)
-        errors.add(:base, "Variants combination already exists.")
-        return false
+      errors.add(:base, "Variants combination already exists.")
+      return false
     end
   end
 

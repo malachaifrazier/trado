@@ -1,6 +1,6 @@
 # OrderItemAccessory Documentation
 #
-# The order item accessory table represents an accessory associated with a order item. 
+# The order item accessory table represents an accessory associated with a order item.
 # They reference further data from the accessory table and are persisted for as long as the order, and it's order items, are associated with is present..
 # == Schema Information
 #
@@ -16,8 +16,8 @@
 #
 
 class OrderItemAccessory < ActiveRecord::Base
-    attr_accessible :accessory_id, :order_item_id, :price, :quantity
+  attr_accessible :accessory_id, :order_item_id, :price, :quantity
 
-    belongs_to :order_item
-    belongs_to :accessory
+  belongs_to :order_item
+  belongs_to :accessory
 end

@@ -17,14 +17,13 @@
 #
 
 class Notification < ActiveRecord::Base
-
   attr_accessible :notifiable_id, :notifiable_type, :email, :sent, :sent_at
 
   belongs_to :notifiable, polymorphic: true
 
-  validates :email,         presence:   { message: 'is required' },
-                            format:     { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
-                            uniqueness: { scope: [:notifiable_id, :notifiable_type, :sent_at],
-                                          message: 'notification has already been created.' }
+  validates :email, presence:   { message: 'is required' },
+                    format:     { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
+                    uniqueness: { scope: [:notifiable_id, :notifiable_type, :sent_at],
+                                  message: 'notification has already been created.' }
 
 end

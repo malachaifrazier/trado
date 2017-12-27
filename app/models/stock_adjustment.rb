@@ -17,23 +17,22 @@
 #
 
 class StockAdjustment < ActiveRecord::Base
-
   attr_accessible :adjustment, :description, :sku_id, :stock_total, :_destroy, :duplicate
 
   attr_accessor :_destroy, :duplicate
 
   belongs_to :sku
 
-  validates :description, :adjustment, :adjusted_at,             presence: true
+  validates :description, :adjustment, :adjusted_at, presence: true
   validate :adjustment_value
 
-  before_save :adjust_sku_stock,                                 unless: :duplicate
-  after_create :send_stock_notifications,                        unless: :duplicate
-  before_validation :set_current_time_as_adjusted,               unless: :duplicate
+  before_save :adjust_sku_stock,                   unless: :duplicate
+  after_create :send_stock_notifications,          unless: :duplicate
+  before_validation :set_current_time_as_adjusted, unless: :duplicate
 
   default_scope { order(adjusted_at: :desc) }
 
-  scope :active,                                                 -> { where.not(description: nil) }
+  scope :active, -> { where.not(description: nil) }
 
   # Modify the sku stock with the associated stock level adjustment value
   #

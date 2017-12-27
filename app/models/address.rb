@@ -1,6 +1,6 @@
 # Address Documentation
 #
-# The address table provides support for handling order and user addresses. 
+# The address table provides support for handling order and user addresses.
 # It has a polymorphic relation so can be utilised by various models.
 # == Schema Information
 #
@@ -31,13 +31,12 @@ class Address < ActiveRecord::Base
   :addressable_type, :default, :first_name, :last_name, :postcode, :telephone, :order_id, :address_country_attributes
 
   belongs_to :order
-  belongs_to :addressable,                                          polymorphic: true
+  belongs_to :addressable, polymorphic: true
 
-  has_one :address_country,                                         dependent: :destroy
-  has_one :country,                                                 through: :address_country
+  has_one :address_country, dependent: :destroy
+  has_one :country,         through: :address_country
 
-  validates :first_name, :last_name, 
-  :address, :city, :postcode,                                       presence: true
+  validates :first_name, :last_name, :address, :city, :postcode, presence: true
 
   accepts_nested_attributes_for :address_country
 

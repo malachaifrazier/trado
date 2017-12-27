@@ -1,6 +1,6 @@
 # CartItemAccessory Documentation
 #
-# The cart item accessory table represents an accessory associated with a cart item. 
+# The cart item accessory table represents an accessory associated with a cart item.
 # These are transferred to order_item_accessories and deleted once the associated order has been completed.
 # == Schema Information
 #
@@ -16,10 +16,8 @@
 #
 
 class CartItemAccessory < ActiveRecord::Base
-
   attr_accessible :cart_item_id, :price, :quantity, :accessory_id
 
   belongs_to :cart_item
-  belongs_to :accessory 
-
+  belongs_to :accessory
 end

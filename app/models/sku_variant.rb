@@ -14,12 +14,12 @@
 #
 
 class SkuVariant < ActiveRecord::Base
-    attr_accessible :name, :sku_id, :variant_type_id
+  attr_accessible :name, :sku_id, :variant_type_id
 
-    belongs_to :sku,                                inverse_of: :variants
-    belongs_to :variant_type,                       class_name: 'VariantType'
+  belongs_to :sku,          inverse_of: :variants
+  belongs_to :variant_type, class_name: 'VariantType'
 
-    validates :name,                                presence: true
+  validates :name, presence: true
 
-    auto_strip_attributes :name
+  auto_strip_attributes :name
 end

@@ -1,6 +1,6 @@
 # DeliveryServicePrice Documentation
 #
-# The delivery_service_price table contains a list of available delivery prices for a type of delivery service. 
+# The delivery_service_price table contains a list of available delivery prices for a type of delivery service.
 # Each with a description and price and dimension parameters.
 # == Schema Information
 #
@@ -23,23 +23,22 @@
 #
 
 class DeliveryServicePrice < ActiveRecord::Base
+  include ActiveScope
 
-  attr_accessible :code, :price, :description, :min_weight, :max_weight, :min_length, :max_length, 
+  attr_accessible :code, :price, :description, :min_weight, :max_weight, :min_length, :max_length,
   :min_thickness, :max_thickness, :active, :delivery_service_id
 
-  has_many :orders,                                                     foreign_key: :delivery_id, dependent: :restrict_with_exception
   belongs_to :delivery_service
-  has_many :countries,                                                  through: :delivery_service
 
-  validates :code, :price, :min_weight, :max_weight,
-  :min_length, :max_length, :min_thickness, :max_thickness,             presence: true
-  validates :code,                                                      uniqueness: { scope: [:active, :delivery_service_id] }
-  validates :description,                                               length: { maximum: 180, message: :too_long }
-  validates :price,                                                     format: { with: /\A(\$)?(\d+)(\.|,)?\d{0,2}?\z/ }, uniqueness: { scope: :delivery_service_id }
+  has_many :countries, through: :delivery_service
+  has_many :orders,    foreign_key: :delivery_id, dependent: :restrict_with_exception
 
-  scope :find_collection,                                               ->(delivery_service_prices, country_id) { joins(:countries).where(delivery_service_prices: { id: delivery_service_prices }, countries: { id: country_id }).uniq.load }
+  validates :code, :price, :min_weight, :max_weight, :min_length, :max_length, :min_thickness, :max_thickness, presence: true
+  validates :code, uniqueness: { scope: [:active, :delivery_service_id] }
+  validates :description, length: { maximum: 180, message: :too_long }
+  validates :price, format: { with: /\A(\$)?(\d+)(\.|,)?\d{0,2}?\z/ }, uniqueness: { scope: :delivery_service_id }
 
-  include ActiveScope
+  scope :find_collection, -> (delivery_service_prices, country_id) { joins(:countries).where(delivery_service_prices: { id: delivery_service_prices }, countries: { id: country_id }).uniq.load }
 
   # Returns a string of the parent delivery service courier_name and name attributes concatenated
   #

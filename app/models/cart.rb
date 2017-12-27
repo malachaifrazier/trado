@@ -1,6 +1,6 @@
 # Cart Documentation
 #
-# The cart table is designed as a session stored container (current_cart) for all the current user's cart item. 
+# The cart table is designed as a session stored container (current_cart) for all the current user's cart item.
 # This is destroyed if abandoned for more than a day or the associated order has been completed.
 # == Schema Information
 #
@@ -19,16 +19,18 @@ class Cart < ActiveRecord::Base
 
   serialize :delivery_service_ids, Array
 
-  has_many :cart_items,                             dependent: :destroy
-  has_many :cart_item_accessories,                  through: :cart_items
-  has_many :skus,                                   through: :cart_items
+  belongs_to :delivery, class_name: 'DeliveryServicePrice'
+
+  has_many :cart_items,            dependent: :destroy
+  has_many :cart_item_accessories, through: :cart_items
+  has_many :skus,                  through: :cart_items
+
   has_one :order
-  belongs_to :delivery,                             class_name: 'DeliveryServicePrice'
 
   # Calculates the total price of a cart
   #
   # @return [Decimal] total sum of cart items
-  def total_price 
+  def total_price
   	cart_items.to_a.sum { |item| item.total_price }
   end
 

@@ -1,6 +1,6 @@
 # Attachment Documentation
 #
-# The attachment table provides support for handling file uploads throughout the application. 
+# The attachment table provides support for handling file uploads throughout the application.
 # It has a polymorphic relation so can be utilised by various models.
 # == Schema Information
 #
@@ -18,12 +18,12 @@
 class Attachment < ActiveRecord::Base
   attr_accessible :attachable_id, :attachable_type, :file, :default_record
 
-  belongs_to :attachable,           polymorphic: true
+  belongs_to :attachable, polymorphic: true
 
-  mount_uploader :file,             FileUploader
+  mount_uploader :file, FileUploader
 
-  validates :file,                  format: { with: /\.(gif|jpg|png)\z/i, message: "must be a URL for GIF, JPG, JPEG or PNG image." }
-  validates :file,                  presence: true, :if => :not_setting_attachment?
+  validates :file, format: { with: /\.(gif|jpg|png)\z/i, message: "must be a URL for GIF, JPG, JPEG or PNG image." }
+  validates :file, presence: true, if: :not_setting_attachment?
 
   after_save :set_default
 
@@ -39,8 +39,8 @@ class Attachment < ActiveRecord::Base
 
   # If the attachment is a StoreSetting or User, ignore the presence validation
   #
-  # @return [Boolean] 
+  # @return [Boolean]
   def not_setting_attachment?
-    return attachable_type == 'StoreSetting' || attachable_type == 'User' ? false : true 
+    return attachable_type == 'StoreSetting' || attachable_type == 'User' ? false : true
   end
 end

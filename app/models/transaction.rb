@@ -1,6 +1,6 @@
 # Transaction Documentation
 #
-# The transaction table contains all the required information for either a successful or failed payment transaction for an order. 
+# The transaction table contains all the required information for either a successful or failed payment transaction for an order.
 # This allows the scalability of adding more payment methods to the application.
 # == Schema Information
 #
@@ -22,10 +22,10 @@
 #
 
 class Transaction < ActiveRecord::Base
-    attr_accessible :fee, :gross_amount, :order_id, :payment_status, :payment_type, 
-    :tax_amount, :transaction_type, :net_amount, :status_reason, :error_code
-  
-    belongs_to :order
+  attr_accessible :fee, :gross_amount, :order_id, :payment_status, :payment_type,
+  :tax_amount, :transaction_type, :net_amount, :status_reason, :error_code
 
-    enum payment_status: [:pending, :completed, :failed]
+  belongs_to :order
+
+  enum payment_status: [:pending, :completed, :failed]
 end

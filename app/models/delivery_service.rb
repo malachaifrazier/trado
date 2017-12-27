@@ -1,6 +1,6 @@
 # DeliveryService Documentation
 #
-# The delivery_service table contains a list of available delivery services, with detailed service data. 
+# The delivery_service table contains a list of available delivery services, with detailed service data.
 # A delivery service can have many delivery service prices.
 # == Schema Information
 #
@@ -19,26 +19,26 @@
 #
 
 class DeliveryService < ActiveRecord::Base
-    attr_accessible :name, :description, :courier_name, :order_price_minimum, :order_price_maximum, :active, :country_ids, :tracking_url
+  include ActiveScope
 
-    has_many :prices,                                       class_name: 'DeliveryServicePrice', dependent: :destroy
-    has_many :active_prices,                                -> { where(active: true).order(price: :asc) }, class_name: 'DeliveryServicePrice'
-    has_many :destinations,                                 dependent: :destroy
-    has_many :countries,                                    through: :destinations                                                     
-    has_many :orders,                                       through: :prices
+  attr_accessible :name, :description, :courier_name, :order_price_minimum, :order_price_maximum, :active, :country_ids, :tracking_url
 
-    validates :name, :courier_name,                         presence: true
-    validates :name,                                        uniqueness: { scope: [:active, :courier_name] }
-    validates :description,                                 length: { maximum: 180, message: :too_long }
+  has_many :prices, class_name: 'DeliveryServicePrice', dependent: :destroy
+  has_many :active_prices, -> { where(active: true).order(price: :asc) }, class_name: 'DeliveryServicePrice'
+  has_many :destinations, dependent: :destroy
+  has_many :countries,    through: :destinations
+  has_many :orders,       through: :prices
 
-    default_scope { order(courier_name: :desc) }
+  validates :name, :courier_name, presence: true
+  validates :name,                uniqueness: { scope: [:active, :courier_name] }
+  validates :description,         length: { maximum: 180, message: :too_long }
 
-    include ActiveScope
+  default_scope { order(courier_name: :desc) }
 
-    # Returns a string of the courier_name and name attributes concatenated
-    #
-    # @return [String] courier and name
-    def full_name
-        [courier_name, name].join(' ')
-    end
+  # Returns a string of the courier_name and name attributes concatenated
+  #
+  # @return [String] courier and name
+  def full_name
+    [courier_name, name].join(' ')
+  end
 end
